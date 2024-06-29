@@ -27,14 +27,26 @@ const Banner = () => {
   const [searchInput, setSearchInput] = useState("");
   const [filteredProducts, setfilteredProducts] = useState(productData);
   // console.log(productData)
+
+  // Search functionality
+  const handleSearch = e => {
+    const SearchTerm = e.target.value;
+    setSearchInput(SearchTerm);
+
+    // Filtering product based on search
+    const filtered = productData.filter((product) => product.name.toLowerCase().includes(SearchTerm.toLowerCase()));
+
+    setfilteredProducts(filtered);
+  }
   return (
     <div className='banner-section style-4'>
       <div className='container'>
         <div className='banner-content'>
           {title}
           <form>
-            <input type="text" name='search' id='search' placeholder='Search Your Products' />
+            <input type="text" name='search' id='search' placeholder='Search Your Products' value={searchInput} onChange={handleSearch} />
           </form>
+          <p>{desc}</p>
         </div>
       </div>
     </div>
